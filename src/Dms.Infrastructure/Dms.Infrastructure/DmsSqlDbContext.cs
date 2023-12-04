@@ -18,7 +18,7 @@ namespace Dms.Infrastructure
 
         public DmsSqlDbContext(DbContextOptions<DmsSqlDbContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            
         }
     }
 }
