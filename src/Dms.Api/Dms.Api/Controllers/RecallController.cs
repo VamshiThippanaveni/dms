@@ -10,18 +10,29 @@ namespace Dms.Api.Controllers
     public class RecallController : ControllerBase
     {
         private readonly IRecallRepository _recallRepository;
+        private readonly ILogger<RecallController> _logger;
 
-        public RecallController(IRecallRepository recallRepository)
+        public RecallController(IRecallRepository recallRepository, ILogger<RecallController> logger)
         {
             _recallRepository = recallRepository;
+            _logger = logger;
         }
 
         [HttpGet]
         [Route("GetAllRecalls")]
         public async Task<IActionResult> GetAllRecalls()
         {
-            var recalls = await _recallRepository.GetAllRecallsAsync();
-            return Ok(recalls);
+            try
+            {
+                _logger.LogInformation("Get all Recalls method started");
+                var recalls = await _recallRepository.GetAllRecallsAsync();
+                return Ok(recalls);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("An error occured while fetching all recalls method");
+                return StatusCode(500, "Internal server error");
+            }
         }
         //[HttpGet]
         [HttpGet("{id}")]

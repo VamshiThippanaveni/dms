@@ -10,16 +10,28 @@ namespace Dms.Api.Controllers
     public class PatientController : ControllerBase
     {
         private readonly IPatientRepository _patientRepository;
-        public PatientController(IPatientRepository repository)
+        private readonly ILogger<PatientController> _logger;
+        public PatientController(IPatientRepository repository,ILogger<PatientController> logger)
         {
             _patientRepository = repository;   
+            _logger = logger;
         }
         [HttpGet]
         //[Route("GetAllPatients")]
         public async Task<IActionResult> GetAllPatients()
         {
-            var patient=await _patientRepository.GetAllPatientsAsync();
-            return Ok(patient);
+            try
+            {
+                _logger.LogInformation("Get all patients method started");
+                var patient = await _patientRepository.GetAllPatientsAsync();
+                return Ok(patient);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occured while fetching all patients method");
+                return StatusCode(500, "Internal server error");
+            }
+           
         }
         //[HttpGet]
         [HttpGet("{id}")]
