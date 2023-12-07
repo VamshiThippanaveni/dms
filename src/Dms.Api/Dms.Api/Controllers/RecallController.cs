@@ -20,7 +20,8 @@ namespace Dms.Api.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllRecalls")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        //[Route("GetAllRecalls")]
         public async Task<IActionResult> GetAllRecalls()
         {
             try
@@ -37,6 +38,8 @@ namespace Dms.Api.Controllers
         }
         //[HttpGet]
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         //[Route("GetRecallById")]
         public async Task<IActionResult> GetRecallById(Guid id)
         {
@@ -60,6 +63,7 @@ namespace Dms.Api.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         //[Route("AddRecall")]
         public async Task<IActionResult> AddRecall([FromBody] Recall recall)
         {
@@ -78,6 +82,8 @@ namespace Dms.Api.Controllers
         }
         //[HttpPut]
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         //[Route("UpdateRecall")]
         public async Task<IActionResult> UpdateRecall(Guid id, [FromBody] Recall recall)
         {
@@ -102,6 +108,8 @@ namespace Dms.Api.Controllers
         }
         //[HttpDelete]
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         //[Route("DeleteRecall")]
         public async Task<IActionResult> DeleteRecall(Guid id)
         {

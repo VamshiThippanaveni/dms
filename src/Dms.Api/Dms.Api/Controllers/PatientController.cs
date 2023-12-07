@@ -17,6 +17,7 @@ namespace Dms.Api.Controllers
             _logger = logger;
         }
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         //[Route("GetAllPatients")]
         public async Task<IActionResult> GetAllPatients()
         {
@@ -35,6 +36,8 @@ namespace Dms.Api.Controllers
         }
         //[HttpGet]
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         //[Route("GetPatientById")]
         public async Task<IActionResult> GetPatientById(Guid id)
         {
@@ -57,6 +60,7 @@ namespace Dms.Api.Controllers
             }          
         }
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         //[Route("AddPatient")]
         public async Task<IActionResult> AddPatient([FromBody] Patient patient)
         {
@@ -74,7 +78,9 @@ namespace Dms.Api.Controllers
             }         
         }
         //[HttpGet]
-        [HttpPut("{id}")]
+        [HttpPut("{id}")]        
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         //[Route("UpdatePatient")]
         public async Task<IActionResult> UpdatePatient(Guid id, [FromBody] Patient patient)
         {
@@ -100,6 +106,8 @@ namespace Dms.Api.Controllers
         }
         //[HttpDelete]
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         //[Route("DeletePatient")]
         public async Task<IActionResult> DeletePatient(Guid id)
         {

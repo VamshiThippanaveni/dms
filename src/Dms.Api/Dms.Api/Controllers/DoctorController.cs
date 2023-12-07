@@ -19,6 +19,7 @@ namespace Dms.Api.Controllers
             _logger = logger;
         }
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         //https://localhost:7110/api/Doctor
         public async Task<IActionResult> GetAllDoctors()
         {
@@ -38,6 +39,8 @@ namespace Dms.Api.Controllers
         }
         //[HttpGet]
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         //https://localhost:7110/api/Doctor/Guid
         public async Task<IActionResult> GetDoctorById(Guid id)
         {
@@ -60,6 +63,7 @@ namespace Dms.Api.Controllers
             }
         }
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         //https://localhost:7110/api/Doctor/Add
         public async Task<IActionResult> AddDoctor([FromBody] Doctor doctor)
         {
@@ -78,6 +82,8 @@ namespace Dms.Api.Controllers
         }
         //[HttpPut]
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         //https://localhost:7110/api/Doctor/EditGuid
         public async Task<IActionResult> UpdateDoctor(Guid id, [FromBody] Doctor doctor)
         {
@@ -102,6 +108,8 @@ namespace Dms.Api.Controllers
         }
         //[HttpDelete]
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         //https://localhost:7110/api/Doctor/deleteGuid
         public async Task<IActionResult> DeleteDoctor(Guid id)
         {
